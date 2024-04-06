@@ -1,9 +1,7 @@
 import { tweetsData } from "./data.js";
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
-//console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 
-const tweetInput = document.getElementById("tweet-input")
 
 document.addEventListener("click", function(event) {
     if(event.target.dataset.like) {
@@ -19,7 +17,6 @@ document.addEventListener("click", function(event) {
 })
 
 function handleLikeClick(tweetID) {
-
     const targetTweetObj = tweetsData.find(function(tweet) {
         if(tweet.uuid === tweetID) {
             if(tweet.isLiked) {
@@ -31,8 +28,8 @@ function handleLikeClick(tweetID) {
             render()
         }
     })
-
 }
+
 function handleRetweetClick(tweetID) {
 
     const targetTweetObj = tweetsData.find(function(tweet) {
@@ -47,7 +44,6 @@ function handleRetweetClick(tweetID) {
             render()
         }
     })
-
 }
 
 function handleReplyClick(tweetID) {
@@ -57,11 +53,10 @@ function handleReplyClick(tweetID) {
     } else {
         repliesDiv.classList.add("hidden")
     }
-        
 }
 
 function handleTweetBtnClick(target) {
-
+    const tweetInput = document.getElementById("tweet-input")
     if(tweetInput.value) {
         const newTweet = {
             handle: '@Scrimba',
@@ -140,7 +135,6 @@ function getFeedHtml() {
             </div> 
         </div>
         `
-        
     });
     return feedHTML
 }
@@ -148,7 +142,6 @@ function getFeedHtml() {
 function render() {
     const feed = document.getElementById("feed")
     feed.innerHTML = getFeedHtml()
-
 }
 
 render()
