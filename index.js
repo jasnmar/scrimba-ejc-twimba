@@ -55,9 +55,13 @@ function getFeedHtml() {
     let feedHTML = ""
     tweetsData.forEach(tweet => {
         let likeIconClass = ''
+        let retweetIconClass = ''
 
         if(tweet.isLiked) {
             likeIconClass = 'liked'
+        }
+        if(tweet.isRetweeted) {
+            retweetIconClass = 'retweeted'
         }
         feedHTML += `
         <div class="tweet">
@@ -76,7 +80,7 @@ function getFeedHtml() {
                             ${tweet.likes}
                         </span>
                         <span class="tweet-detail">
-                            <i class="fa-solid fa-retweet" data-retweet="${tweet.uuid}"></i>
+                            <i class="fa-solid fa-retweet ${retweetIconClass}" data-retweet="${tweet.uuid}"></i>
                             ${tweet.retweets}
                         </span>
                     </div>   
