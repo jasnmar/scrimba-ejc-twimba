@@ -36,7 +36,13 @@ function getFeedHtml() {
         `
         
     });
-    console.log(feedHTML)
+    return feedHTML
 }
 
-getFeedHtml()
+function render() {
+    const feed = document.getElementById("feed")
+    feed.innerHTML = getFeedHtml()
+
+}
+
+render()
