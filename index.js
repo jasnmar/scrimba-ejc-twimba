@@ -1,13 +1,9 @@
 import { tweetsData } from "./data.js";
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+//console.log(uuidv4()); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
-console.log(tweetsData);
 
 const tweetInput = document.getElementById("tweet-input")
-const tweetBtn = document.getElementById('tweet-btn')
-
-tweetBtn.addEventListener("click", function(event) {
-    console.log(tweetInput.value)
-})
 
 document.addEventListener("click", function(event) {
     if(event.target.dataset.like) {
@@ -16,12 +12,14 @@ document.addEventListener("click", function(event) {
         handleRetweetClick(event.target.dataset.retweet)
     } else if(event.target.dataset.reply) {
         handleReplyClick(event.target.dataset.reply)
+    } else if(event.target.id==="tweet-btn") {
+        handleTweetBtnClick(event.target)
     }
 
 })
 
 function handleLikeClick(tweetID) {
-    console.log(tweetID)
+
     const targetTweetObj = tweetsData.find(function(tweet) {
         if(tweet.uuid === tweetID) {
             if(tweet.isLiked) {
@@ -30,14 +28,13 @@ function handleLikeClick(tweetID) {
                 tweet.likes++
             }
             tweet.isLiked = !tweet.isLiked
-            console.log(tweet)
             render()
         }
     })
 
 }
 function handleRetweetClick(tweetID) {
-    console.log(tweetID)
+
     const targetTweetObj = tweetsData.find(function(tweet) {
         if(tweet.uuid === tweetID) {
             if(tweet.isRetweeted) {
@@ -46,7 +43,7 @@ function handleRetweetClick(tweetID) {
                 tweet.retweets++
             }
             tweet.isRetweeted = !tweet.isRetweeted
-            console.log(tweet)
+
             render()
         }
     })
@@ -61,6 +58,22 @@ function handleReplyClick(tweetID) {
         repliesDiv.classList.add("hidden")
     }
         
+}
+
+function handleTweetBtnClick(target) {
+    const newTweet = {
+        handle: '@Scrimba',
+        profilePic: `images/scrimbalogo.png`,
+        likes: 0,
+        retweets: 0,
+        tweetText: tweetInput.value,
+        replies: [],
+        isLiked: false,
+        isRetweeted: false,
+        uuid: uuidv4()
+    }
+
+    console.log(newTweet)
 }
 
 function getFeedHtml() {
@@ -79,7 +92,6 @@ function getFeedHtml() {
         let repliesHTML = ''
 
         if(tweet.replies.length>0) {
-            console.log(tweet.uuid)
             tweet.replies.forEach(reply => {
                 repliesHTML += `
                 <div class="tweet-reply">
