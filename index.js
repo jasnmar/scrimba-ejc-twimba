@@ -14,6 +14,8 @@ document.addEventListener("click", function(event) {
         handleLikeClick(event.target.dataset.like)
     } else if(event.target.dataset.retweet) {
         handleRetweetClick(event.target.dataset.retweet)
+    } else if(event.target.dataset.reply) {
+        handleReplyClick(event.target.dataset.reply)
     }
 
 })
@@ -49,6 +51,16 @@ function handleRetweetClick(tweetID) {
         }
     })
 
+}
+
+function handleReplyClick(tweetID) {
+    const repliesDiv = document.getElementById("replies-"+tweetID)
+    if(repliesDiv.classList.contains('hidden')) {
+        repliesDiv.classList.remove("hidden")
+    } else {
+        repliesDiv.classList.add("hidden")
+    }
+        
 }
 
 function getFeedHtml() {
@@ -105,7 +117,7 @@ function getFeedHtml() {
                     </div>   
                 </div>            
             </div>
-            <div id="replies-${tweet.uuid}">
+            <div class="hidden" id="replies-${tweet.uuid}">
                 ${repliesHTML}
             </div> 
         </div>
