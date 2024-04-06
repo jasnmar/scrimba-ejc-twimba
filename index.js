@@ -61,19 +61,25 @@ function handleReplyClick(tweetID) {
 }
 
 function handleTweetBtnClick(target) {
-    const newTweet = {
-        handle: '@Scrimba',
-        profilePic: `images/scrimbalogo.png`,
-        likes: 0,
-        retweets: 0,
-        tweetText: tweetInput.value,
-        replies: [],
-        isLiked: false,
-        isRetweeted: false,
-        uuid: uuidv4()
+
+    if(tweetInput.value) {
+        const newTweet = {
+            handle: '@Scrimba',
+            profilePic: `images/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: tweetInput.value,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: uuidv4()
+        }
+        tweetsData.unshift(newTweet)
+        tweetInput.value = ""
+        render()
+
     }
-    tweetsData.unshift(newTweet)
-    render()
+
 }
 
 function getFeedHtml() {
