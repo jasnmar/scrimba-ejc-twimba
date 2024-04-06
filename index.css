@@ -43,7 +43,9 @@ header{
 }
 
 /* textareas + btn */
-
+.fa-solid {
+    color:#999
+}
 textarea{
     border: none;
     padding: 10px;
