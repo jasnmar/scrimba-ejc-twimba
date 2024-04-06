@@ -72,8 +72,8 @@ function handleTweetBtnClick(target) {
         isRetweeted: false,
         uuid: uuidv4()
     }
-
-    console.log(newTweet)
+    tweetsData.unshift(newTweet)
+    render()
 }
 
 function getFeedHtml() {
